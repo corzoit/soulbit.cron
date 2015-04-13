@@ -90,17 +90,17 @@ class Cli extends \Phalcon\Cli\Console implements IRun {
 		$this->_taskId = NULL;
 	}
 
-        /**
-         * Set Dependency Injector with configuration variables
-         *
-         * @throws Exception
-         * @param string $file          full path to configuration file
-         */
-        public function setConfig($file) {
+    /**
+     * Set Dependency Injector with configuration variables
+     *
+     * @throws Exception
+     * @param string $file          full path to configuration file
+     */
+    public function setConfig($file) {
 
-                if (!file_exists($file)) {
-                        throw new \Exception('Unable to load configuration file');
-                }
+        if (!file_exists($file)) {
+                throw new \Exception('Unable to load configuration file');
+        }
 			
 		$di = new \Phalcon\DI\FactoryDefault\CLI();
                 $di->set('config', new \Phalcon\Config(require $file));
@@ -130,29 +130,29 @@ class Cli extends \Phalcon\Cli\Console implements IRun {
 			return $connection;
 		});
 
-                $this->setDI($di);
-        }
+        $this->setDI($di);
+    }
 
 
-        /**
-         * Set namespaces to tranverse through in the autoloader
-         *
-         * @link http://docs.phalconphp.com/en/latest/reference/loader.html
-         * @throws Exception
-         * @param string $file          map of namespace to directories
+    /**
+     * Set namespaces to tranverse through in the autoloader
+     *
+     * @link http://docs.phalconphp.com/en/latest/reference/loader.html
+     * @throws Exception
+     * @param string $file          map of namespace to directories
 	 * @param string $appDir	location of the app directory
-         */
-        public function setAutoload($file, $appDir) {
-                if (!file_exists($file)) {
-                        throw new \Exception('Unable to load autoloader file');
-                }
-
-                // Set dir to be used inside include file
-                $namespaces = include $file;
-
-                $loader = new \Phalcon\Loader();
-                $loader->registerNamespaces($namespaces)->register();
+     */
+    public function setAutoload($file, $appDir) {
+        if (!file_exists($file)) {
+                throw new \Exception('Unable to load autoloader file');
         }
+
+        // Set dir to be used inside include file
+        $namespaces = include $file;
+
+        $loader = new \Phalcon\Loader();
+        $loader->registerNamespaces($namespaces)->register();
+    }
 
 
 	/**
@@ -168,13 +168,13 @@ class Cli extends \Phalcon\Cli\Console implements IRun {
 
 
 	/**
-         * Set events to be triggered before/after certain stages in Micro App
-         *
-         * @param object $event         events to add
-         */
-        public function setEvents(\Phalcon\Events\Manager $events) {
-                $this->setEventsManager($events);
-        }
+     * Set events to be triggered before/after certain stages in Micro App
+     *
+     * @param object $event         events to add
+     */
+    public function setEvents(\Phalcon\Events\Manager $events) {
+        $this->setEventsManager($events);
+    }
 
 
 	/**

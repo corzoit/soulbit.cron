@@ -14,7 +14,7 @@ use \Cli\Output as Output;
 //http://stackoverflow.com/questions/6004453/how-to-remove-multiple-deleted-files-in-git-repository
 class MailerTask extends \Phalcon\Cli\Task {
 
-	public function readAction() {
+	public function processAction() {
         echo "\ncron to process!\n\n";
 	}
 }
