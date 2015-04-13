@@ -1,5 +1,10 @@
 #!/usr/bin/php
 <?php
+    $md_dir = "/tmp/maildump";
+    if(!is_dir($md_dir))
+    {
+        mkdir($md_dir, 0775);
+    }
 
     $fi = fopen("php://stdin", "r");
     $contents = "";
@@ -9,5 +14,5 @@
     }
     fclose($fi);
 
-    $f = "/tmp/".time().".mail";
+    $f = $md_dir."/".time()."_".mt_rand(100, 999).".mail";
     file_put_contents($f, $contents);
