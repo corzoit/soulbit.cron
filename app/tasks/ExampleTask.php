@@ -19,6 +19,8 @@ class ExampleTask extends \Phalcon\Cli\Task {
         $contents = "";
         while(!feof($fi))
         {
+            Output::stdout("\nreading line");
+            
             $contents .= fread($fi, 1024);
         }
         fclose($fi);
