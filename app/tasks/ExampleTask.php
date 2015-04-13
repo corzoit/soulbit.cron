@@ -15,18 +15,10 @@ use \Cli\Output as Output;
 class ExampleTask extends \Phalcon\Cli\Task {
 
 	public function test1Action() {
-        $fi = fopen("php://stdin", "r");
-        $contents = "";
-        while(!feof($fi))
-        {
-            Output::stdout("\nreading line");
-            
-            $contents .= fread($fi, 1024);
-        }
-        fclose($fi);
-
+        $input = file_get_contents("php://stdin");
+        
         $f = "/tmp/".time();
-        file_put_contents($f, $contents);
+        file_put_contents($f, $input);
         
 		Output::stdout("\nDone: ".$f);
 	}
