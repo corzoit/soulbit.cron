@@ -18,7 +18,7 @@ class ExampleTask extends \Phalcon\Cli\Task {
         //$input = file_get_contents("php://stdin");
         
         $f = "/tmp/".time();
-        file_put_contents($f, "Rand!");
+        //file_put_contents($f, "Rand!");
         
 		Output::stdout("\nDone: ".$f);
 	}
