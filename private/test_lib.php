@@ -19,7 +19,12 @@
     echo("\n\nhtml = $html<br />");
     //echo("\n\nattachments = $attachments<br />");
 
-    $save_dir = '../sandbox/mailattachments/';
+    $save_dir = '/tmp/mail-attachments/'; //saving files to tmp
+    if(!is_dir($save_dir))
+    {
+        mkdir($save_dir, 0775);
+    }
+    
     foreach($attachments as $attachment) {
       // get the attachment name
       $filename = $attachment->filename;
@@ -29,5 +34,7 @@
           fwrite($fp, $bytes);
         }
         fclose($fp);
+
+        echo("\n\n".$save_dir.$filename."<br />");
       }
     }    
