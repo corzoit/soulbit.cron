@@ -1,0 +1,16 @@
+From ubuntu@sbx.email  Mon Apr 13 17:45:01 2015
+Received: by sbx.email (Postfix, from userid 1000)
+	id 246AA427FB; Mon, 13 Apr 2015 17:45:01 +0000 (UTC)
+From: root@sbx.email (Cron Daemon)
+To: ubuntu@sbx.email
+Subject: Cron <ubuntu@sbx> php -f /var/sbxrobots/soulbox.io.cron/private/cli.php Example test1
+Content-Type: text/plain; charset=ANSI_X3.4-1968
+X-Cron-Env: <SHELL=/bin/sh>
+X-Cron-Env: <HOME=/home/ubuntu>
+X-Cron-Env: <PATH=/usr/bin:/bin>
+X-Cron-Env: <LOGNAME=ubuntu>
+Message-Id: <20150413174501.246AA427FB@sbx.email>
+Date: Mon, 13 Apr 2015 17:45:01 +0000 (UTC)
+
+
+Done: /tmp/1428947101
