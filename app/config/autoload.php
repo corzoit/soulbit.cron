@@ -16,6 +16,7 @@
 
 $autoload = [
 	'Utilities\Debug' => $appDir . '/library/utilities/debug/',
+	'Utilities\Mail' => $appDir . '/library/utilities/mail/',
 	'Application' => $appDir . '/library/application/',
 	'Interfaces' => $appDir . '/library/interfaces/',
 	'Controllers' => $appDir . '/controllers/',

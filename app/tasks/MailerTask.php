@@ -11,12 +11,17 @@ namespace Tasks;
 
 use \Cli\Output as Output;
 
-use \SoulboxCron\Models\Repositories\SbMessage as RepoMessage,
+use \SoulboxCron\Models\Repositories\SbMessage as RepoMessage;
+use \Cli\Utilities\Mail\MimeMailParser;
 
 //http://stackoverflow.com/questions/6004453/how-to-remove-multiple-deleted-files-in-git-repository
 class MailerTask extends \Phalcon\Cli\Task {
 
 	public function processAction() {
+
+		//RepoMessage
+
+		$Parser = new MimeMailParser();
         
         echo "\ncron to process!\n\n";
 	}
