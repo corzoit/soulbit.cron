@@ -1,8 +1,10 @@
 <?php
+namespace Utilities\Mail;
 
 //require_once('attachment.class.php');
-require_once('MimeMailParser_attachment.class.php');
+//require_once('MimeMailParserAttachment.class.php');
 
+use \Utilities\Mail\MimeMailParserAttachment as MimeMailParserAttachment;
 /**
  * Fast Mime Mail parser Class using PHP's MailParse Extension
  * @author gabe@fijiwebdesign.com
@@ -174,6 +176,7 @@ class MimeMailParser {
                 } else {
                         throw new Exception('MimeMailParser::setPath() or MimeMailParser::setText() must be called before retrieving email headers.');
                 }
+                
                 return false;
         }
 
@@ -236,7 +239,7 @@ class MimeMailParser {
                         $content_id = $this->getPartContentId($part);
 
                         if ($content_id !== FALSE) {
-                                $content[] = new MimeMailParser_attachment(
+                                $content[] = new MimeMailParserAttachment(
                                         $this->getPartContentName($part),
                                         $this->getPartContentType($part),
                                         $this->getAttachmentStream($part),
@@ -272,7 +275,7 @@ class MimeMailParser {
                                         $disposition = $dispositions[0];
                                 }
 
-                                $attachments[] = new MimeMailParser_attachment(
+                                $attachments[] = new MimeMailParserAttachment(
                                         $content_name,
                                         $this->getPartContentType($part),
                                         $this->getAttachmentStream($part),

@@ -12,12 +12,12 @@
     $html = $Parser->getMessageBody('html');
     $attachments = $Parser->getAttachments();
 
-    echo("\n\nto = $to<br />");
+    echo("\n\nto1 = $to<br />");
     echo("\n\nfrom = $from<br />");
     echo("\n\nsubject = $subject<br />");
     echo("\n\ntext = $text<br />");
     echo("\n\nhtml = $html<br />");
-    //echo("\n\nattachments = $attachments<br />");
+    echo("\n\nattachments = $attachments<br />");
 
     $save_dir = '/tmp/mail-attachments/'; //saving files to tmp
     if(!is_dir($save_dir))

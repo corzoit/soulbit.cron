@@ -1,6 +1,6 @@
 <?php
 
-namespace \SoulboxCron\Models\Entities;
+namespace SoulboxCron\Models\Entities;
 
 class SbSysCliRuntimeError extends \Phalcon\Mvc\Model {
 

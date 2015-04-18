@@ -16,11 +16,12 @@
 
 $autoload = [
 	'Utilities\Debug' => $appDir . '/library/utilities/debug/',
-	'Utilities\Mail' => $appDir . '/library/utilities/mail/',
+	'Utilities\Mail' => $appDir . '/library/utilities/mail',
 	'Application' => $appDir . '/library/application/',
 	'Interfaces' => $appDir . '/library/interfaces/',
 	'Controllers' => $appDir . '/controllers/',
-	'Models' => $appDir . '/models/',
+	'Models\Repositories' => $appDir . '/models/repositories',
+	'SoulboxCron\Models\Entities' => $appDir . '/models/entities',
 	'Tasks' => $appDir . '/tasks/',
 	'Cli' => $appDir . '/library/cli/',
 	'Events\Cli' => $appDir . '/library/events/cli/',

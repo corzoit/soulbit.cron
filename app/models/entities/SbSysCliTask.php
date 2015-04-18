@@ -1,6 +1,6 @@
 <?php
 
-namespace \SoulboxCron\Models\Entities;
+namespace SoulboxCron\Models\Entities;
 
 class SbSysCliTask extends \Phalcon\Mvc\Model {
 
