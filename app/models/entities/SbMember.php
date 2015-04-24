@@ -31,11 +31,12 @@ class SbMember extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->hasMany('sb_member_id', 'SbMessage', 'sb_member_id');
-        $this->hasMany('sb_member_id', 'SbReceiver', 'sb_member_id');
-        $this->hasMany('sb_member_id', 'SbTag', 'sb_member_id');
-        $this->hasMany('sb_member_id', 'SbConnection', 'requester_id');
-        $this->hasMany('sb_member_id', 'SbConnection', 'receiver_id');
-        $this->hasMany('sb_member_id', 'SbActionLog', 'sb_member_id');
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbMessage', 'sb_member_id', array('alias' => 'SbMessage'));
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbReceiver', 'sb_member_id', array('alias' => 'SbReceiver'));
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbTag', 'sb_member_id', array('alias' => 'SbTag'));
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbConnection', 'requester_id', array('alias' => 'SbConnectionRequester'));
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbConnection', 'receiver_id', array('alias' => 'SbConnectionReceiver'));
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbActionLog', 'sb_member_id', array('alias' => 'SbActionLog'));
+        $this->hasMany('sb_member_id', '\SoulboxCron\Models\Entities\SbReminder', 'sb_member_id', array('alias' => 'SbReminder'));
     }
 }

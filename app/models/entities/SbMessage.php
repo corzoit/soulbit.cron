@@ -20,9 +20,9 @@ class SbMessage extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->hasMany('sb_message_id', 'SbAttachment', 'sb_message_id');
-        $this->hasMany('sb_message_id', 'SbMessageTag', 'sb_message_id');
-        $this->hasMany('sb_message_id', 'SbReceiver', 'sb_member_id');
-        $this->belongsTo('sb_sender_member_id', 'SbMember', 'sb_member_id');
+        $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbAttachment', 'sb_message_id', array('alias' => 'SbAttachment'));
+        $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbMessageTag', 'sb_message_id', array('alias' => 'SbMessageTag'));
+        $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbReceiver', 'sb_member_id', array('alias' => 'SbReceiver'));
+        $this->belongsTo('sb_sender_member_id', '\SoulboxCron\Models\Entities\SbMember', 'sb_member_id', array('alias' => 'SbMember'));
     }
 }

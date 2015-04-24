@@ -101,6 +101,11 @@ class Cli extends \Phalcon\Cli\Console implements IRun {
         if (!file_exists($file)) {
                 throw new \Exception('Unable to load configuration file');
         }
+
+\Phalcon\Mvc\Model::setup([
+    'notNullValidations' => false,
+    'useDynamicUpdate' => true
+]);
 			
 		$di = new \Phalcon\DI\FactoryDefault\CLI();
                 $di->set('config', new \Phalcon\Config(require $file));

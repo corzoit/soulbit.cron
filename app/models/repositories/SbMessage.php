@@ -1,6 +1,6 @@
 <?php
 
-namespace Models\Repositories;
+namespace SoulboxCron\Models\Repositories;
 
 class SbMessage
 {

@@ -10,7 +10,7 @@ class SbTag extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->belongsTo('sb_member_id', 'SbMember', 'sb_member_id');
-        $this->hasMany('sb_tag_id', 'SbTagMessage', 'sb_tag_id');
+        $this->belongsTo('sb_member_id', 'SbMember', 'sb_member_id', array('alias' => 'SbMember'));
+        $this->hasMany('sb_tag_id', 'SbTagMessage', 'sb_tag_id', array('alias' => 'SbTagMessage'));
     }
 }
