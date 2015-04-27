@@ -13,7 +13,7 @@ use \Phalcon\Logger\Adapter\File as FileAdapter;
 
 use \Cli\Output as Output;
 
-use \SoulboxCron\Models\Repositories\SbMember as RepoMember;
+use \SoulboxCron\Models\Repositories\SbReminder as RepoReminder;
 use \SoulboxCron\Models\Repositories\SbMessage as RepoMessage;
 
 use \Utilities\Mail\MimeMailParser as MailParser;
@@ -127,9 +127,9 @@ class MailerTask extends \Phalcon\Cli\Task
             $qm->updatePid();
             
             //functionality here
-            $member_repo = new RepoMember();
-            $reminders = $member_repo->getRemindersByFrequency();
-            $num_created = $member_repo->createReminderEmails($reminders, $this->config->reminder);
+            $reminder_repo = new RepoReminder();
+            $reminders = $reminder_repo->getRemindersByFrequency();
+            $num_created = $reminder_repo->createReminderEmails($reminders, $this->config->reminder);
             echo("Reminders created: ".$num_created);
         }
         else
@@ -152,11 +152,104 @@ class MailerTask extends \Phalcon\Cli\Task
             $qm->updatePid();
             
             //TODO: process and send email
+            $reminder_repo = new RepoReminder();
+            $reminder_emails = $reminder_repo->getReminderEmails(1000);
+            while(count($reminder_emails))
+            {
+                foreach($reminder_emails as $key => $reminder_email)
+                {
+                    /*HERE*/
+                }
+
+                $reminder_emails = $reminder_repo->getReminderEmails(1000);
+            }
         }
         else
         {
             echo("\nTerminating process because it is running already\n");
             exit();
         }
+    }    
+
+    public function testAction()
+    {
+
+        $sendgrid_conf = $this->config->mailer->sendgrid;
+
+/*
+curl -X POST https://api.sendgrid.com/api/mail.send.json -d api_user=alexcorzo@gmail.com -d api_key=XXXXXXXX -d 
+to=alexcorzo@gmail.com -d toname=Alex GMAIL -d subject=hey how is it going -d text=huh? -d html=huh? HTML -d from=alex.corzo@flexit.net
+*/
+
+        $fields = array('api_user' => $sendgrid_conf->account,
+                        'api_key' => $sendgrid_conf->password,
+                        'from' => 'alex.corzo@flexit.net',
+                        'to' => 'alexcorzo@gmail.com',
+                        'toname' => 'ACDC',
+                        'subject' => 'sendgrid test using curl',
+                        'html' => 'html');
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/v3/api/mail.send.json');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
+        
+        $response = curl_exec ($ch);
+
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $header = substr($response, 0, $header_size);
+        $body = substr($response, $header_size);
+
+        curl_close ($ch);
+
+        echo("\n\n============\n\n");
+        print_r (array('status_code' => $http_code,
+                        'headers' => $header,
+                        'body' => $body,
+                        'json' => ''));
+        echo("\n\n============\n\n");
+
+
+
+
+
+/*
+        echo("\n\n*1*1\n\n");
+
+        $sendgrid = new \SendGrid\SendGrid($sendgrid_conf->account, $sendgrid_conf->password);
+        
+        $email = new \SendGrid\Email();
+        $email->addTo('alex.corzo@flexit.net')
+            ->setFrom('alexcorzo@gmail.com')
+            ->setSubject('Testing SG integration')
+            ->setText('Hello World!')
+            ->setHtml('<strong>Hello World!</strong>');
+
+        $res = $sendgrid->send($email);
+
+        var_dump($res);
+        
+        echo("\n\nSENDGRID OBJ CREATED\n\n");        
+*/
+        /*
+    'mailer' => array(
+        'default' => 'sendgrid',
+        'mandrill' => array(
+            'account' => 'alexcorzo@gmail.com',
+            'description' => 'Soulbox',
+            'key' => 'o2P2sGc-JPF6UuXPiHyDaw',
+            'password' => null,),
+        'sendgrid' => array(
+            'account' => 'alexcorzo@gmail.com',
+            'description' => 'Soulbox',
+            'key' => null,
+            'password' => '7877855574'),)
+);
+        */
     }    
 }

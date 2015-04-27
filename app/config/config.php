@@ -24,5 +24,17 @@ $settings = array(
         'secret' => 'SBXr3m!nd3r',
         'length' => 15,
         'alpha' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
+    'mailer' => array(
+        'default' => 'sendgrid',
+        'mandrill' => array(
+            'account' => 'alexcorzo@gmail.com',
+            'description' => 'Soulbox',
+            'key' => 'o2P2sGc-JPF6UuXPiHyDaw',
+            'password' => null,),
+        'sendgrid' => array(
+            'account' => 'alexcorzo@gmail.com',
+            'description' => 'Soulbox',
+            'key' => null,
+            'password' => '7877855574'),)
 );
 return $settings;
