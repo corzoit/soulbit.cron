@@ -172,9 +172,10 @@ class MailerTask extends \Phalcon\Cli\Task
             {
                 foreach($reminder_emails as $key => $reminder_email)
                 {
+                    /**/
                     $send_params = array('fromname' => 'Soulbox Reminders',
                                             'from' => 'reminders@soulboxapp.com',
-                                            'to' => $reminder_email->receiver_email,
+                                            'to' => $reminder_email->receiver_email, 
                                             'subject' => $reminder_email->subject,
                                             'message' => $reminder_email->message);
 
@@ -187,6 +188,9 @@ class MailerTask extends \Phalcon\Cli\Task
                     }
                     else if($mail_with == 'mandrill')
                     {
+
+print_r($response_arr);
+exit();
                         if(isset($response_arr['_id']))
                         {
                             $reminder_email->processed = 1;
@@ -195,7 +199,7 @@ class MailerTask extends \Phalcon\Cli\Task
                         }
                         else //recording error
                         {
-                            $reminder_email->processed = 0;
+                            $reminder_email->processed = -1; //processed with error
                             $reminder_email->mailer = $mail_with;
                             $reminder_email->mailer_error = $response;
                         }
