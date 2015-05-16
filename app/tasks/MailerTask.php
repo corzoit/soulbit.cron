@@ -198,7 +198,7 @@ echo "\n\n\n";
                             && isset($response_arr[0]['_id']))
                         {
                             $reminder_email->processed = 1;
-                            $reminder_email->mailer = $mail_with;
+                            $reminder_email->mailer = $mail_with.'"and';
                             $reminder_email->mailer_id = $response_arr[0]['_id'];
                             echo"\nUPDATING 1\n";
                         }
