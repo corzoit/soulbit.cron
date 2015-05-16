@@ -32,9 +32,9 @@ $settings = array(
             'key' => 'o2P2sGc-JPF6UuXPiHyDaw',
             'password' => null,),
         'sendgrid' => array(
-            'account' => 'alexcorzo@gmail.com',
+            'account' => 'corzoit',
             'description' => 'Soulbox',
             'key' => null,
-            'password' => '7877855574'),)
+            'password' => '12345678a'),)
 );
 return $settings;
