@@ -48,7 +48,7 @@ class SbReminder
     {
         $reminders_created = 0;
 
-        echo "reminder count = ".count($reminders)."\n";
+        echo "\n\n*****reminder count = ".count($reminders)."\n";
 
         $date_now = date('Y-m-d');
         foreach($reminders as $key => $reminder)
