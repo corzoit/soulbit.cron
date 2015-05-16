@@ -179,7 +179,8 @@ class MailerTask extends \Phalcon\Cli\Task
                                             'subject' => $reminder_email->subject.' ('.$reminder_email->pubid.')',
                                             'message' => $reminder_email->message);
 
-                    $response = $wrapper->send($send_params);
+                    //$response = $wrapper->send($send_params);
+                    $response = '[{"email":"alexcorzo@gmail.com","status":"sent","_id":"4939248aa1d147fe9e6df74fff46c2ff","reject_reason":null}]';
                     $response_arr = json_decode($response, true);
 
                     if($mail_with == 'sendgrid')
@@ -188,8 +189,9 @@ class MailerTask extends \Phalcon\Cli\Task
                     }
                     else if($mail_with == 'mandrill')
                     {
-
+echo "\n\nresponse_arr\n";
 print_r($response_arr);
+echo "\n\n\n";
 exit();
                         if(isset($response_arr['_id']))
                         {
