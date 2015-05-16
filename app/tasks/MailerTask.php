@@ -189,24 +189,20 @@ class MailerTask extends \Phalcon\Cli\Task
                     }
                     else if($mail_with == 'mandrill')
                     {
-echo "\n\n**$response**\n";
-echo "\n\nresponse_arr\n";
-print_r($response_arr);
-echo "\n\n\n";
-
-                        if(is_array($response_arr)
+                        if(false && is_array($response_arr)
                             && isset($response_arr[0]['_id']))
                         {
                             $reminder_email->processed = 1;
                             $reminder_email->mailer = $mail_with.'"and';
                             $reminder_email->mailer_id = $response_arr[0]['_id'];
-                            $reminder_email->mailer_error = $response;
+                            $reminder_email->mailer_error = "";
                             echo"\nUPDATING 1\n";
                         }
                         else //recording error
                         {
                             $reminder_email->processed = -1; //processed with error
                             $reminder_email->mailer = $mail_with;
+                            $reminder_email->mailer_id = null;
                             $reminder_email->mailer_error = $response;
 
                             echo"\nUPDATING -1\n";
