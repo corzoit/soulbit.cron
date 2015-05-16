@@ -48,6 +48,8 @@ class SbReminder
     {
         $reminders_created = 0;
 
+        print_r($reminders);
+
         $date_now = date('Y-m-d');
         foreach($reminders as $key => $reminder)
         {
