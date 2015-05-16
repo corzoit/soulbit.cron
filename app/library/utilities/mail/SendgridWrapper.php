@@ -73,12 +73,12 @@ class SendgridWrapper
             }
             else
             {
-                throw new Exception("Class '".get_class($this)."': missing from/to/subject/message params (".__LINE__.")");            
+                throw new \Exception("Class '".get_class($this)."': missing from/to/subject/message params (".__LINE__.")");            
             }                
         }
         else
         {
-            throw new Exception("Class '".get_class($this)."': config is not properly set (".__LINE__.")");            
+            throw new \Exception("Class '".get_class($this)."': config is not properly set (".__LINE__.")");            
         }        
     }
 }

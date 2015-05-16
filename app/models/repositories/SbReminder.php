@@ -22,7 +22,7 @@ class SbReminder
         $day_of_year    = date('z')+1;
 
         //$time_now       = date('H:i:').'00'; //utc time
-        $time_now       = '18:31:00'; //for testing
+        $time_now       = '18:31:00'; //for testing, this has to match the record on DB for the process to go on
 
         $conditions = "status = 1 
                         AND CHAR_LENGTH(TRIM(subject)) > 0
@@ -48,14 +48,11 @@ class SbReminder
     {
         $reminders_created = 0;
 
-        echo "\n\n*****reminder count = ".count($reminders)."\n";
-
         $date_now = date('Y-m-d');
         foreach($reminders as $key => $reminder)
         {
             $re_obj = new EntityReminderEmail();
             $re_obj->sb_reminder_id = $reminder->sb_reminder_id;
-            echo "re_obj->sb_reminder_id = ".$re_obj->sb_reminder_id."\n";
             $re_obj->sb_message_id  = null;
             $re_obj->receiver_email = $reminder->SbMember->email;
             $re_obj->subject        = $reminder->subject;
