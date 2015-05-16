@@ -189,7 +189,7 @@ class MailerTask extends \Phalcon\Cli\Task
                     }
                     else if($mail_with == 'mandrill')
                     {
-//echo "\n\nresponse_arr\n";
+echo "\n\n**$response**\n";
 echo "\n\nresponse_arr\n";
 print_r($response_arr);
 echo "\n\n\n";
