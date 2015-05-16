@@ -176,7 +176,7 @@ class MailerTask extends \Phalcon\Cli\Task
                     $send_params = array('fromname' => 'Soulbox Reminders',
                                             'from' => 'reminders@soulboxapp.com',
                                             'to' => $reminder_email->receiver_email, 
-                                            'subject' => $reminder_email->subject,
+                                            'subject' => $reminder_email->subject.' ('.$reminder_email->pubid.')',
                                             'message' => $reminder_email->message);
 
                     $response = $wrapper->send($send_params);
