@@ -191,8 +191,8 @@ to=alexcorzo@gmail.com -d toname=Alex GMAIL -d subject=hey how is it going -d te
 
         $ch = curl_init();
 
-        //curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/api/mail.send.json'); //works
-        curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/v3/mail.send.json'); //doesn't
+        curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/api/mail.send.json'); //works
+        //curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/v3/mail.send.json'); //doesn't
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_VERBOSE, 1);
         curl_setopt($ch, CURLOPT_HEADER, 1);
