@@ -499,6 +499,3 @@ class MimeMailParser {
     }
 
 }
-
-
-?>

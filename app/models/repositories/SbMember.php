@@ -12,7 +12,7 @@ class SbMember
 {
     public function __construct()
     {
-        
+
     }
 
 }

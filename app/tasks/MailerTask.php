@@ -17,6 +17,8 @@ use \SoulboxCron\Models\Repositories\SbReminder as RepoReminder;
 use \SoulboxCron\Models\Repositories\SbMessage as RepoMessage;
 
 use \Utilities\Mail\MimeMailParser as MailParser;
+use \Utilities\Mail\SendgridWrapper as SendgridWrapper;
+use \Utilities\Mail\MandrillWrapper as MandrillWrapper;
 use \Utilities\Cron\QueueMaster as QueueMaster;
 
 class MailerTask extends \Phalcon\Cli\Task
@@ -150,15 +152,56 @@ class MailerTask extends \Phalcon\Cli\Task
         if(!$qm->isRunning()) //only if process is not running already
         {
             $qm->updatePid();
-            
+
+            $mail_with = $this->config->mailer->default;
+            $wrapper = null;
+
+            if($mail_with == 'sendgrid')
+            {
+                $wrapper = new SendgridWrapper($this->config->mailer->sendgrid);
+            }
+            else if($mail_with == 'mandrill')
+            {
+                $wrapper = new MandrillWrapper($this->config->mailer->mandrill);
+            }
+           
             //TODO: process and send email
             $reminder_repo = new RepoReminder();
             $reminder_emails = $reminder_repo->getReminderEmails(1000);
-            while(count($reminder_emails))
+            while($wrapper != null && count($reminder_emails))
             {
                 foreach($reminder_emails as $key => $reminder_email)
                 {
-                    /*HERE*/
+                    $send_params = array('fromname' => 'Soulbox Reminders',
+                                            'from' => 'reminders@soulboxapp.com',
+                                            'to' => $reminder_email->SbReminder->receiver_email,
+                                            'subject' => $reminder_email->SbReminder->subject,
+                                            'message' => $reminder_email->SbReminder->message);
+
+                    $response = $wrapper->send($send_params);
+                    $response_arr = json_decode($response, true);
+
+                    if($mail_with == 'sendgrid')
+                    {
+                        //TODO
+                    }
+                    else if($mail_with == 'mandrill')
+                    {
+                        if(isset($response_arr['_id']))
+                        {
+                            $reminder_email->processed = 1;
+                            $reminder_email->mailer = $mail_with;
+                            $reminder_email->mailer_id = $response_arr['_id'];
+                        }
+                        else //recording error
+                        {
+                            $reminder_email->processed = 0;
+                            $reminder_email->mailer = $mail_with;
+                            $reminder_email->mailer_error = $response;
+                        }
+
+                        $reminder_repo->updateRemainderMailer($reminder_email);
+                    }                    
                 }
 
                 $reminder_emails = $reminder_repo->getReminderEmails(1000);
@@ -166,91 +209,42 @@ class MailerTask extends \Phalcon\Cli\Task
         }
         else
         {
-            echo("\nTerminating process because it is running already\n");
+            echo "\nTerminating process because it is running already\n";
             exit();
         }
     }    
 
     public function testAction()
     {
+        $mail_with = $this->config->mailer->default;
 
-        $sendgrid_conf = $this->config->mailer->sendgrid;
+        $send_params = array('fromname' => 'Soulbox Reminders',
+                                'from' => 'reminders@soulboxapp.com',
+                                'to' => 'alex.corzo@flexit.net',
+                                'subject' => '['.$mail_with.'] No OB - Hello from Wrapper',
+                                'message' => 'Hi Alex,<br /><br />
+                                                This is a message sent from the wrapper!<br /><br />
+                                                Bye!');
 
-/*
-curl -X POST https://api.sendgrid.com/api/mail.send.json -d api_user=alexcorzo@gmail.com -d api_key=XXXXXXXX -d 
-to=alexcorzo@gmail.com -d toname=Alex GMAIL -d subject=hey how is it going -d text=huh? -d html=huh? HTML -d from=alex.corzo@flexit.net
-*/
+        $wrapper = null;
 
-        $fields = array('api_user' => $sendgrid_conf->account,
-                        'api_key' => $sendgrid_conf->password,
-                        'from' => 'alex.corzo@flexit.net',
-                        'to' => 'alexcorzo@gmail.com',
-                        'toname' => 'ACDC',
-                        'subject' => 'VER 1111! sendgrid test using curl',
-                        'html' => 'html VERSION 111 - version 3<br /><br /><br />');
+        if($mail_with == 'sendgrid')
+        {
+            $sendgrid_conf = $this->config->mailer->sendgrid;
+            $wrapper = new SendgridWrapper($sendgrid_conf);
+        }
+        else if($mail_with == 'mandrill')
+        {
+            $mandrill_conf = $this->config->mailer->mandrill;
+            $wrapper = new MandrillWrapper($mandrill_conf);
+        }
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/api/mail.send.json'); //works
-        //curl_setopt($ch, CURLOPT_URL, 'https://api.sendgrid.com/v3/mail.send.json'); //doesn't
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_VERBOSE, 1);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
-        
-        $response = curl_exec ($ch);
-
-        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-        $header = substr($response, 0, $header_size);
-        $body = substr($response, $header_size);
-
-        curl_close ($ch);
-
-        echo("\n\n============\n\n");
-        print_r (array('status_code' => $http_code,
-                        'headers' => $header,
-                        'body' => $body,
-                        'json' => ''));
-        echo("\n\n============\n\n");
-
-
-
-
-
-/*
-        echo("\n\n*1*1\n\n");
-
-        $sendgrid = new \SendGrid\SendGrid($sendgrid_conf->account, $sendgrid_conf->password);
-        
-        $email = new \SendGrid\Email();
-        $email->addTo('alex.corzo@flexit.net')
-            ->setFrom('alexcorzo@gmail.com')
-            ->setSubject('Testing SG integration')
-            ->setText('Hello World!')
-            ->setHtml('<strong>Hello World!</strong>');
-
-        $res = $sendgrid->send($email);
-
-        var_dump($res);
-        
-        echo("\n\nSENDGRID OBJ CREATED\n\n");        
-*/
-        /*
-    'mailer' => array(
-        'default' => 'sendgrid',
-        'mandrill' => array(
-            'account' => 'alexcorzo@gmail.com',
-            'description' => 'Soulbox',
-            'key' => 'o2P2sGc-JPF6UuXPiHyDaw',
-            'password' => null,),
-        'sendgrid' => array(
-            'account' => 'alexcorzo@gmail.com',
-            'description' => 'Soulbox',
-            'key' => null,
-            'password' => '7877855574'),)
-);
-        */
+        if($wrapper != null)
+        {
+            $response = $wrapper->send($send_params);
+            echo "\n\nOut:\n";
+            echo $response;
+            echo "\n\nEND\n";
+        }
     }    
 }

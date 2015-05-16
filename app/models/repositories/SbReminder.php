@@ -94,5 +94,8 @@ class SbReminder
         return $reminder_emails;
     }
 
-
+    public function updateRemainderMailer($reminder_email_obj)
+    {
+        $reminder_email_obj->save();
+    }
 }
