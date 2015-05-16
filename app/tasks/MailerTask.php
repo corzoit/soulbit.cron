@@ -200,6 +200,7 @@ echo "\n\n\n";
                             $reminder_email->processed = 1;
                             $reminder_email->mailer = $mail_with.'"and';
                             $reminder_email->mailer_id = $response_arr[0]['_id'];
+                            $reminder_email->mailer_error = $response;
                             echo"\nUPDATING 1\n";
                         }
                         else //recording error
@@ -211,9 +212,7 @@ echo "\n\n\n";
                             echo"\nUPDATING -1\n";
                         }
 
-                        $reminder_repo->updateRemainderMailer($reminder_email);
-
-exit();                        
+                        $reminder_repo->updateRemainderMailer($reminder_email);        
                     }                    
                 }
 
