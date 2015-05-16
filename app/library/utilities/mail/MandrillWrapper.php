@@ -68,12 +68,10 @@ class MandrillWrapper
                 $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
                 $header = substr($response, 0, $header_size);
                 $body = substr($response, $header_size);
-                $body = substr($body, 1, strlen($body)-2); //getting rid of first and last double quotes
-                $body = stripslashes($body);
 
                 curl_close ($ch);
                 
-                return json_encode($body);
+                return $body; //already in json format
             }
             else
             {
