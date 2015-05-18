@@ -159,17 +159,22 @@ class MailerTask extends \Phalcon\Cli\Task
                                                                     'delivery_age' => 0,
                                                                     'delivery_age_day_offset' => 0);
                                             
-                                            $messaje_obj = $message_repo->createMessage($message_data, $this->config->message);
+                                            $message_obj = $message_repo->createMessage($message_data, $this->config->message);
 
-                                            $reminder_email_obj->message_id = $messaje_obj->message_id;
-                                            $reminder_repo->updateRemainderMailer($reminder_email_obj);
-                                            
+                                            if(is_object($message_obj))
+                                            {
+                                                $reminder_email_obj->message_id = $message_obj->message_id;
+                                                $reminder_repo->updateRemainderMailer($reminder_email_obj);
 
-                                            print_r($message_data);
+                                                echo "\nMessage created @ ".$now_utc."\n";
 
-                                            echo "\nMessage created @ ".$now_utc."\n";
-
-                                            $remove_file = true;
+                                                $remove_file = true;
+                                            }
+                                            else
+                                            {
+                                                echo "\n---0\n";
+                                                //TODO: implement logging logic for stats                                                
+                                            }
                                         }
                                         else
                                         {

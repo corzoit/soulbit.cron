@@ -46,6 +46,6 @@ class SbMessage
             exit();
         }   
 
-        return $messages_created;
+        return $messages_created > 0 ? $messaje_obj:false;
     }
 }
