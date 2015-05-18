@@ -171,6 +171,16 @@ class MimeMailParser {
                 if (isset($this->parts[1])) {
                         $headers = $this->getPartHeaders($this->parts[1]);
                         if (isset($headers[$name])) {
+                                if($name == 'from'
+                                        || $name == 'to')
+                                {
+                                        $bracket_pos = strrpos($headers[$name], "<");
+                                        if($bracket_pos !== false)
+                                        {
+                                                $headers[$name] = substr($headers[$name], $bracket_pos+1);
+                                                $headers[$name] = substr($headers[$name], 0, strrpos($headers[$name], ">")-1);                                                
+                                        }
+                                }
                                 return $headers[$name];
                         }
                 } else {
