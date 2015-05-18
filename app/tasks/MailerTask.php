@@ -37,10 +37,6 @@ class MailerTask extends \Phalcon\Cli\Task
         {
             $qm->updatePid();
             
-            //functionality here
-
-            //TODO: Differenciate between regular emails and replies to emails sent as reminders
-
             $log_file = $this->config->logs->main;
             $log_file_path = substr($log_file, 0, strrpos($log_file, "/"));
             if(!is_dir($log_file_path))
@@ -145,6 +141,8 @@ class MailerTask extends \Phalcon\Cli\Task
                                         if(strtolower($reminder_email_obj->receiver_email) == strtolower($from))
                                         {                                            
                                             $now_utc = date('Y-m-d H:i:s');
+
+                                            //TODO: implement logic to clean part of the "message" so it doesn't contain the original message
                                             
                                             //we create a messaje Object
                                             $message_data = array('creation_dt' => $now_utc,
