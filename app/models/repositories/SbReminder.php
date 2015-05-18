@@ -98,4 +98,13 @@ class SbReminder
     {
         $reminder_email_obj->save();
     }
+
+    public function getReminderEmailByPubid($pubid)
+    {
+        $conditions = "processed = 1 AND pubid = ?1";
+
+        $reminder_email = EntityReminderEmail::findFirst(array('conditions' => $conditions,
+                                                                'bind' => array(1 => $pubid)));
+        return $reminder_email;
+    }
 }

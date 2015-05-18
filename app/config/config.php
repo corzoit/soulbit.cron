@@ -16,10 +16,15 @@ $settings = array(
 		'port' => 3306
 	),
     'maildump' => array(
-        'path' => $__base_folder.'sandbox/maildump/',
+        /*'path' => $__base_folder.'sandbox/maildump/',*/
+        'path' => '/tmp/maildump/'),
         'attachment_path' => '/tmp/mail-attachments/'),
     'logs' => array(
         'main' => '/tmp/app/logs/main.log'), /*$__base_folder.'app/logs/main.log')*/
+    'message' => array(
+        'secret' => 'SBXm3$$ag3',
+        'length' => 15,
+        'alpha' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
     'reminder' => array(
         'secret' => 'SBXr3m!nd3r',
         'length' => 15,

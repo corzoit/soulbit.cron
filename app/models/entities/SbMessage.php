@@ -25,4 +25,15 @@ class SbMessage extends \Phalcon\Mvc\Model
         $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbReceiver', 'sb_member_id', array('alias' => 'SbReceiver'));
         $this->belongsTo('sb_sender_member_id', '\SoulboxCron\Models\Entities\SbMember', 'sb_member_id', array('alias' => 'SbMember'));
     }
+
+    public function loadFromArray($data_arr)
+    {
+        foreach($data_arr as $key => $item)
+        {
+            if(property_exists($this, $key))
+            {
+                $this[$key] = $item;
+            }
+        }
+    }
 }
