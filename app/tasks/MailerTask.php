@@ -124,6 +124,9 @@ class MailerTask extends \Phalcon\Cli\Task
 
                                 $subject = substr($subject, 0, $bracket_pos);
 
+                                //removing "Re: " from subject if exists. This is only a feature of the reminders
+                                $subject = stripos($subject, "re: ") === 0 ? substr($subject, 4):$subject;
+
                                 $reminder_email_obj = $reminder_repo->getReminderEmailByPubid($pubid);
 
                                 echo "\nBACKET FOUND *$pubid*\n";
@@ -155,12 +158,12 @@ class MailerTask extends \Phalcon\Cli\Task
                                                                     'delivery_dt' => $now_utc,
                                                                     'delivery_age' => 0,
                                                                     'delivery_age_day_offset' => 0);
-                                            /*
+                                            
                                             $messaje_obj = $message_repo->createMessage($message_data, $this->config->message);
 
                                             $reminder_email_obj->message_id = $messaje_obj->message_id;
                                             $reminder_repo->updateRemainderMailer($reminder_email_obj);
-                                            */
+                                            
 
                                             print_r($message_data);
 
