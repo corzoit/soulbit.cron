@@ -105,6 +105,7 @@ class SbReminder
 
         $reminder_email = EntityReminderEmail::findFirst(array('conditions' => $conditions,
                                                                 'bind' => array(1 => $pubid)));
+        var_dump($reminder_email);
         return $reminder_email;
     }
 }

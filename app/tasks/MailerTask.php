@@ -119,7 +119,7 @@ class MailerTask extends \Phalcon\Cli\Task
                             $bracket_pos = strrpos($subject, "(");
                             if($bracket_pos !== FALSE)
                             {
-                                echo "\nBACKET FOUND\n";
+                                echo "\nBACKET FOUND *$pubid*\n";
                                 $pubid = rtrim(substr($subject, $bracket_pos+1));
                                 $subject = substr($subject, 0, $bracket_pos);
 
