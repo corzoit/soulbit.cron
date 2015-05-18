@@ -178,7 +178,7 @@ class MimeMailParser {
                                         if($bracket_pos !== false)
                                         {
                                                 $headers[$name] = substr($headers[$name], $bracket_pos+1);
-                                                $headers[$name] = substr($headers[$name], 0, strrpos($headers[$name], ">")-1);                                                
+                                                $headers[$name] = substr($headers[$name], 0, strrpos($headers[$name], ">"));                                                
                                         }
                                 }
                                 return $headers[$name];
