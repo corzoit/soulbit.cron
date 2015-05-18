@@ -119,11 +119,13 @@ class MailerTask extends \Phalcon\Cli\Task
                             $bracket_pos = strrpos($subject, "(");
                             if($bracket_pos !== FALSE)
                             {
-                                echo "\nBACKET FOUND *$pubid*\n";
-                                $pubid = rtrim(substr($subject, $bracket_pos+1));
+                                $pubid = rtrim(substr($subject, $bracket_pos+1));                                
                                 $subject = substr($subject, 0, $bracket_pos);
 
                                 $reminder_email_obj = $reminder_repo->getReminderEmailByPubid($pubid);
+                                var_dump($reminder_email_obj);
+
+                                echo "\nBACKET FOUND *$pubid*\n";
                                 
                                 //reminder found with the pubid captured on the subject line
                                 if(property_exists($reminder_email_obj, 'sb_reminder_email_id')
