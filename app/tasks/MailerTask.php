@@ -78,12 +78,16 @@ class MailerTask extends \Phalcon\Cli\Task
 
                         $parser->setPath($maildump_path.$entry);
 
+                        echo "\nFile parsing: ".$maildump_path.$entry."\n";
+
                         $to             = $parser->getHeader('to');
                         $from           = $parser->getHeader('from');
                         $subject        = $parser->getHeader('subject');
                         $text           = $parser->getMessageBody('text');
                         $html           = $parser->getMessageBody('html');
                         $attachments    = $parser->getAttachments();
+
+                        echo "\nSubject: ".$subject." / $to\n";
 
                         
                         if(!is_dir($attachment_path))
@@ -115,6 +119,7 @@ class MailerTask extends \Phalcon\Cli\Task
                             $bracket_pos = strrpos($subject, "(");
                             if($bracket_pos !== FALSE)
                             {
+                                echo "\nBACKET FOUND\n";
                                 $pubid = rtrim(substr($subject, $bracket_pos+1));
                                 $subject = substr($subject, 0, $bracket_pos);
 
@@ -124,12 +129,14 @@ class MailerTask extends \Phalcon\Cli\Task
                                 if(property_exists($reminder_email_obj, 'sb_reminder_email_id')
                                     && is_numeric($reminder_email_obj->sb_reminder_email_id))
                                 {
+                                    echo "\nPROP FOUND\n";
                                     //now we make sure that this reminder does not have a "message" already, if it does we terminate this part of the process
                                     if(!is_numeric($reminder_email_obj->sb_message_id))
                                     {
+                                        echo "\nNO MESSAGE ID | ".$reminder_email_obj->receiver_email." == ".$from."\n";
                                         //now we find out info about the sender, we will only accept a message from the original recipient of the reminder, nobody else
                                         if(strtolower($reminder_email_obj->receiver_email) == strtolower($from))
-                                        {
+                                        {                                            
                                             $now_utc = date('Y-m-d H:i:s');
                                             
                                             //we create a messaje Object
@@ -159,27 +166,32 @@ class MailerTask extends \Phalcon\Cli\Task
                                         }
                                         else
                                         {
+                                            echo "\n---1\n";
                                             //TODO: implement logging logic for stats
                                         }
                                     }
                                     else
                                     {
+                                        echo "\n---2\n";
                                         //TODO: implement logging logic for stats
                                     }                                    
                                 }
                                 else
                                 {
+                                    echo "\n---3\n";
                                     //TODO: implement logging logic for stats
                                 }                                
                             }
                             else
                             {
+                                echo "\n---4\n";
                                 //TODO: implement logging logic for stats
                             }                            
                             
                         }
                         else //mail to self or to an authorised user, need to check
                         {
+                            echo "\n---5\n";
                             //TODO: implement this flow where a user sends an email to an @sbx.email box which translates 
                             //      as a private message to an existing user or to self. If it is to another user the system
                             //      needs to validate that the sender has access (connection) to the receiver

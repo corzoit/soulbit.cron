@@ -17,7 +17,7 @@ $settings = array(
 	),
     'maildump' => array(
         /*'path' => $__base_folder.'sandbox/maildump/',*/
-        'path' => '/tmp/maildump/'),
+        'path' => '/tmp/maildump/',
         'attachment_path' => '/tmp/mail-attachments/'),
     'logs' => array(
         'main' => '/tmp/app/logs/main.log'), /*$__base_folder.'app/logs/main.log')*/
