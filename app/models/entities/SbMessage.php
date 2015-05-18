@@ -32,7 +32,7 @@ class SbMessage extends \Phalcon\Mvc\Model
         {
             if(property_exists($this, $key))
             {
-                eval("\$this->".$key." = $item;");
+                eval("\$this->".$key." = \$item;");
             }
         }
     }
