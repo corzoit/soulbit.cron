@@ -163,8 +163,11 @@ class MailerTask extends \Phalcon\Cli\Task
 
                                             if(is_object($message_obj))
                                             {
-                                                $reminder_email_obj->message_id = $message_obj->message_id;
+                                                $reminder_email_obj->sb_message_id = $message_obj->sb_message_id;
                                                 $reminder_repo->updateRemainderMailer($reminder_email_obj);
+
+                                                //TODO: implement receiver logic URGENT
+                                                //TODO: implement attachment logic URGENT
 
                                                 echo "\nMessage created @ ".$now_utc."\n";
 
