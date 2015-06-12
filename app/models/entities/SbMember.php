@@ -19,6 +19,7 @@ class SbMember extends \Phalcon\Mvc\Model
     public $mobile;
     public $mobile_os;
     public $address;
+    public $city;
     public $zip_code;
     public $tz;
     public $dt_format;
