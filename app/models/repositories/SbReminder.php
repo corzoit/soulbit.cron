@@ -46,7 +46,7 @@ class SbReminder
         return $reminders;
     }
 
-    public function createReminderEmails($reminders, $reminder_config, $mailer)
+    public function createReminderEmails($reminders, $reminder_config)
     {
         $reminders_created = 0;
 
@@ -66,7 +66,6 @@ class SbReminder
             $re_obj->subject        = $reminder->subject;
             $re_obj->message        = $reminder->message;
             $re_obj->sent_dt        = $date_now.' '.$reminder->frequency_time;
-            $re_obj->mailer         = $mailer;
             $re_obj->processed      = 0;            
 
             if($re_obj->save())
