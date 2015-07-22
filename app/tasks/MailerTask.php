@@ -301,7 +301,7 @@ class MailerTask extends \Phalcon\Cli\Task
                             && isset($response_arr[0]['_id']))
                         {
                             $reminder_email->processed = 1;
-                            $reminder_email->mailer = $mail_with.'"and';
+                            $reminder_email->mailer = $mail_with;
                             $reminder_email->mailer_id = $response_arr[0]['_id'];
                             $reminder_email->mailer_error = "";
                         }
