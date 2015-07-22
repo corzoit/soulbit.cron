@@ -33,13 +33,19 @@ class SbReminder
                             OR (frequency_t = 'y' AND CONCAT(',', frequency_t, ',') LIKE ?4)
                         )";
 
+        $arr = array(1 => $time_now,
+                      2 => $day_of_week,
+                      3 => $day_of_month,
+                      4 => $day_of_year);
         $reminders = EntityReminder::find(
             array(  'conditions' => $conditions,
-                    'bind'       => array(1 => $time_now,
-                                          2 => $day_of_week,
-                                          3 => $day_of_month,
-                                          4 => $day_of_year)
+                    'bind'       => $arr
         ));
+
+        
+        echo($conditions);
+        echo("\n\n");
+        print_r($arr);
 
         return $reminders;
     }
