@@ -48,11 +48,12 @@ class SbReminder
     {
         $reminders_created = 0;
 
-        //var_dump($reminders);
+        echo("count : ".count($reminders));
 
         $date_now = date('Y-m-d');
         foreach($reminders as $key => $reminder)
         {
+            echo("\nkey = ".$key);
             $reminder_arr = $reminder->toArray();
             print_r($reminder_arr);
 
