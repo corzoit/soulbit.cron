@@ -241,7 +241,9 @@ class MailerTask extends \Phalcon\Cli\Task
             //functionality here
             $reminder_repo = new RepoReminder();
             $reminders = $reminder_repo->getRemindersByFrequency();
-            $num_created = $reminder_repo->createReminderEmails($reminders, $this->config->reminder);
+            $num_created = $reminder_repo->createReminderEmails($reminders, 
+                                                                $this->config->reminder,
+                                                                $this->config->mailer->default);
             echo "\nReminders created: ".$num_created."\n";
         }
         else
