@@ -13,8 +13,8 @@ use \Phalcon\Logger\Adapter\File as FileAdapter;
 
 use \Cli\Output as Output;
 
-use \SoulboxCron\Models\Repositories\SbReminder as RepoReminder;
-use \SoulboxCron\Models\Repositories\SbMessage as RepoMessage;
+use \SoulbitCron\Models\Repositories\SbReminder as RepoReminder;
+use \SoulbitCron\Models\Repositories\SbMessage as RepoMessage;
 
 use \Utilities\Mail\MimeMailParser as MailParser;
 use \Utilities\Mail\SendgridWrapper as SendgridWrapper;

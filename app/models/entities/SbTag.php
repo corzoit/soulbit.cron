@@ -1,6 +1,6 @@
 <?php
 
-namespace SoulboxCron\Models\Entities;
+namespace SoulbitCron\Models\Entities;
 
 class SbTag extends \Phalcon\Mvc\Model
 {        

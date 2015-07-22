@@ -1,8 +1,8 @@
 <?php
 
-namespace SoulboxCron\Models\Repositories;
+namespace SoulbitCron\Models\Repositories;
 
-use \SoulboxCron\Models\Entities\SbSysQueueMaster as EntityQueueMaster;
+use \SoulbitCron\Models\Entities\SbSysQueueMaster as EntityQueueMaster;
 
 class SbSysQueueMaster
 {

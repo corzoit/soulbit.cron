@@ -1,6 +1,6 @@
 <?php
 
-namespace SoulboxCron\Models\Entities;
+namespace SoulbitCron\Models\Entities;
 
 class SbReminderEmail extends \Phalcon\Mvc\Model
 {
@@ -18,7 +18,7 @@ class SbReminderEmail extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->belongsTo('sb_reminder_id', '\SoulboxCron\Models\Entities\SbReminder', 'sb_reminder_id', array('alias' => 'SbReminder'));
-        $this->belongsTo('sb_message_id', '\SoulboxCron\Models\Entities\SbMessage', 'sb_message_id', array('alias' => 'SbMessage'));
+        $this->belongsTo('sb_reminder_id', '\SoulbitCron\Models\Entities\SbReminder', 'sb_reminder_id', array('alias' => 'SbReminder'));
+        $this->belongsTo('sb_message_id', '\SoulbitCron\Models\Entities\SbMessage', 'sb_message_id', array('alias' => 'SbMessage'));
     }
 }

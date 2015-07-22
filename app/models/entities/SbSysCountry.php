@@ -1,6 +1,6 @@
 <?php
 
-namespace SoulboxCron\Models\Entities;
+namespace SoulbitCron\Models\Entities;
 
 class SbCountry extends \Phalcon\Mvc\Model
 {
@@ -19,6 +19,6 @@ class SbCountry extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->hasMany('sb_sys_country_id', '\SoulboxCron\Models\Entities\SbMember', 'sb_sys_country_id', array('alias' => 'SbMember'));
+        $this->hasMany('sb_sys_country_id', '\SoulbitCron\Models\Entities\SbMember', 'sb_sys_country_id', array('alias' => 'SbMember'));
     }
 }

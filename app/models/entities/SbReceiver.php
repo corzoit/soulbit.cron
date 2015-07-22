@@ -1,6 +1,6 @@
 <?php
 
-namespace SoulboxCron\Models\Entities;
+namespace SoulbitCron\Models\Entities;
 
 class SbReceiver extends \Phalcon\Mvc\Model
 {    
@@ -10,7 +10,7 @@ class SbReceiver extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->belongsTo('sb_message_id', '\SoulboxCron\Models\Entities\SbMessage', 'sb_message_id', array('alias' => 'SbTag'));
-        $this->belongsTo('sb_member_id', '\SoulboxCron\Models\Entities\SbMember', 'sb_member_id', array('alias' => 'SbTag'));
+        $this->belongsTo('sb_message_id', '\SoulbitCron\Models\Entities\SbMessage', 'sb_message_id', array('alias' => 'SbTag'));
+        $this->belongsTo('sb_member_id', '\SoulbitCron\Models\Entities\SbMember', 'sb_member_id', array('alias' => 'SbTag'));
     }
 }

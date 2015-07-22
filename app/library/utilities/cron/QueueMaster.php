@@ -1,7 +1,7 @@
 <?php
 namespace Utilities\Cron;
 
-use \SoulboxCron\Models\Repositories\SbSysQueueMaster as RepoQueueMaster;
+use \SoulbitCron\Models\Repositories\SbSysQueueMaster as RepoQueueMaster;
 
 /**
  * Queue master based on a db table

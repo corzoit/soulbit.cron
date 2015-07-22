@@ -1,6 +1,6 @@
 <?php
 
-namespace SoulboxCron\Models\Entities;
+namespace SoulbitCron\Models\Entities;
 
 class SbMessage extends \Phalcon\Mvc\Model
 {
@@ -20,10 +20,10 @@ class SbMessage extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbAttachment', 'sb_message_id', array('alias' => 'SbAttachment'));
-        $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbMessageTag', 'sb_message_id', array('alias' => 'SbMessageTag'));
-        $this->hasMany('sb_message_id', '\SoulboxCron\Models\Entities\SbReceiver', 'sb_member_id', array('alias' => 'SbReceiver'));
-        $this->belongsTo('sb_sender_member_id', '\SoulboxCron\Models\Entities\SbMember', 'sb_member_id', array('alias' => 'SbMember'));
+        $this->hasMany('sb_message_id', '\SoulbitCron\Models\Entities\SbAttachment', 'sb_message_id', array('alias' => 'SbAttachment'));
+        $this->hasMany('sb_message_id', '\SoulbitCron\Models\Entities\SbMessageTag', 'sb_message_id', array('alias' => 'SbMessageTag'));
+        $this->hasMany('sb_message_id', '\SoulbitCron\Models\Entities\SbReceiver', 'sb_member_id', array('alias' => 'SbReceiver'));
+        $this->belongsTo('sb_sender_member_id', '\SoulbitCron\Models\Entities\SbMember', 'sb_member_id', array('alias' => 'SbMember'));
     }
 
     public function loadFromArray($data_arr)

@@ -1,10 +1,10 @@
 <?php
 
-namespace SoulboxCron\Models\Repositories;
+namespace SoulbitCron\Models\Repositories;
 
 use \Utilities\Crypt\Hashids as Hashids;
 
-use \SoulboxCron\Models\Entities\SbMessage as EntityMessage;
+use \SoulbitCron\Models\Entities\SbMessage as EntityMessage;
 
 class SbMessage
 {

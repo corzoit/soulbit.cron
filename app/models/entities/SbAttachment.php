@@ -1,6 +1,6 @@
 <?php
 
-namespace \SoulboxCron\Models\Entities;
+namespace \SoulbitCron\Models\Entities;
 
 class SbAttachment extends \Phalcon\Mvc\Model
 {
@@ -14,6 +14,6 @@ class SbAttachment extends \Phalcon\Mvc\Model
 
     public function initialize()
     {
-        $this->belongsTo('sb_message_id', '\SoulboxCron\Models\Entities\SbMessage', 'sb_message_id', array('alias' => 'SbMessage'));
+        $this->belongsTo('sb_message_id', '\SoulbitCron\Models\Entities\SbMessage', 'sb_message_id', array('alias' => 'SbMessage'));
     }
 }
