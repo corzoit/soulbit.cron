@@ -12,7 +12,7 @@ $settings = array(
 		'host' => 'alpha-soulboxdb.c8ku8altey84.us-west-2.rds.amazonaws.com',
 		'username' => 'sbxworker',
 		'password' => 'max1mum$PIDER',
-		'name' => 'soulboxdb',
+		'name' => 'soulbitdb',
 		'port' => 3306
 	),
     'maildump' => array(
