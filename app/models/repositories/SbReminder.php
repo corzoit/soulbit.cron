@@ -48,11 +48,14 @@ class SbReminder
     {
         $reminders_created = 0;
 
-        var_dump($reminders);
+        //var_dump($reminders);
 
         $date_now = date('Y-m-d');
         foreach($reminders as $key => $reminder)
         {
+            $reminder_arr = $reminder->toArray();
+            print_r($reminder_arr);
+
             $re_obj = new EntityReminderEmail();
             $re_obj->sb_reminder_id = $reminder->sb_reminder_id;
             $re_obj->sb_message_id  = null;
