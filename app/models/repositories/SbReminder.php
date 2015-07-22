@@ -28,24 +28,20 @@ class SbReminder
                         AND CHAR_LENGTH(TRIM(subject)) > 0
                         AND frequency_time = ?1
                         AND (frequency_t = 'd' 
-                            OR (frequency_t = 'w' AND CONCAT(',', frequency_t, ',') LIKE ?2)
-                            OR (frequency_t = 'm' AND CONCAT(',', frequency_t, ',') LIKE ?3)
-                            OR (frequency_t = 'y' AND CONCAT(',', frequency_t, ',') LIKE ?4)
+                            OR (frequency_t = 'w' AND CONCAT(',', frequency_v, ',') LIKE ?2)
+                            OR (frequency_t = 'm' AND CONCAT(',', frequency_v, ',') LIKE ?3)
+                            OR (frequency_t = 'y' AND CONCAT(',', frequency_v, ',') LIKE ?4)
                         )";
 
         $arr = array(1 => $time_now,
-                      2 => $day_of_week,
-                      3 => $day_of_month,
-                      4 => $day_of_year);
+                      2 => ','.$day_of_week.',',
+                      3 => ','.$day_of_month.',',
+                      4 => ','.$day_of_year.',');
+
         $reminders = EntityReminder::find(
             array(  'conditions' => $conditions,
                     'bind'       => $arr
         ));
-
-        
-        echo($conditions);
-        echo("\n\n");
-        print_r($arr);
 
         return $reminders;
     }
