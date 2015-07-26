@@ -46,6 +46,10 @@ class MandrillWrapper
 
                                 );
 
+                echo("<pre>");
+                print_r($fields);
+                echo("</pre>");
+
                 if($fromname != '')
                 {
                     $fields['message']['from_name'] = $fromname;
