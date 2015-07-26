@@ -275,9 +275,7 @@ class MailerTask extends \Phalcon\Cli\Task
            
             $reminder_repo = new RepoReminder();
             $reminder_emails = $reminder_repo->getReminderEmails(1000);
-echo("<pre>reminder_emails\n\n");
-            echo(count($reminder_emails));
-            echo("</pre>");
+
             //TODO: improvement, if using Mandrill then send chunks of 1000
             while($wrapper != null && count($reminder_emails))
             {
@@ -294,13 +292,7 @@ echo("<pre>reminder_emails\n\n");
                                             'reply_to' => $reply_to);
 
                     $response = $wrapper->send($send_params);
-
                     $response_arr = json_decode($response, true);
-
-            echo("<pre>response\n\n");
-            print_r($response_arr);
-            echo("</pre>");
-
 
                     if($mail_with == 'sendgrid')
                     {
@@ -325,7 +317,9 @@ echo("<pre>reminder_emails\n\n");
                         }
 
                         $reminder_repo->updateRemainderMailer($reminder_email);        
-                    }                    
+                    }
+
+                    echo("\nSent to: ".$reminder_email->receiver_email);
                 }
 
                 $reminder_emails = $reminder_repo->getReminderEmails(1000);
