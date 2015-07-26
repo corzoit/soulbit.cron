@@ -281,7 +281,7 @@ class MailerTask extends \Phalcon\Cli\Task
             {
                 foreach($reminder_emails as $key => $reminder_email)
                 {
-                    $reply_to = $this->config->reminder->email_from;
+                    $reply_to = $this->config->reminder->email_reply;
                     $reply_to = str_replace('%pubid%', $reminder_email->pubid, $reply_to);                    
 
                     $send_params = array('fromname' => 'Soulbox Reminders',
