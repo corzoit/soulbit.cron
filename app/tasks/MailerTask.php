@@ -330,6 +330,8 @@ class MailerTask extends \Phalcon\Cli\Task
             echo "\nTerminating process because it is running already\n";
             exit();
         }
+
+        echo("\n\n");
     }    
 
     public function testAction()

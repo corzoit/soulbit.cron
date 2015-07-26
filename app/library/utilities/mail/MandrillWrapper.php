@@ -30,13 +30,7 @@ class MandrillWrapper
                 $toname             = isset($params['toname']) && strlen(trim($params['toname'])) > 0 
                                         ?   $params['toname']:"";
 
-                echo("<pre>params");
-                print_r($params);
-                echo("</pre>");                                        
-
                 $reply_to = isset($params['reply_to']) && strlen(trim($params['reply_to'])) > 0 ? $params['reply_to']:$params['from'];
-
-                echo("\nreply_to = $reply_to\n");
 
                 $fields = array('key' => $this->config->key,
                                 'message' => array('html' => $params['message'],
@@ -51,10 +45,6 @@ class MandrillWrapper
                                 'async' => false,
 
                                 );
-
-                echo("<pre>fields");
-                print_r($fields);
-                echo("</pre>");
 
                 if($fromname != '')
                 {
