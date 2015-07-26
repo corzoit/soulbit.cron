@@ -30,6 +30,8 @@ class MandrillWrapper
                 $toname             = isset($params['toname']) && strlen(trim($params['toname'])) > 0 
                                         ?   $params['toname']:"";
 
+                $reply_to = isset($params['reply_to']) && strlen(trim($params['reply_to'])) > 0 ? $params['reply_to']:$params['from'];
+
                 $fields = array('key' => $this->config->key,
                                 'message' => array('html' => $params['message'],
                                                     'text' => strip_tags(str_replace(array("<br>", "<br />", "<br/>"), "\n", $params['message'])),
@@ -38,7 +40,7 @@ class MandrillWrapper
                                                     'to' => array(
                                                                 array('email' => $params['to'],
                                                                         'type' => 'to')),
-                                                    'headers' => array('Reply-To' => $params['from']),
+                                                    'headers' => array('Reply-To' => $reply_to),
                                                     'important' => $important),
                                 'async' => false,
 

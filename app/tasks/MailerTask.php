@@ -125,8 +125,6 @@ class MailerTask extends \Phalcon\Cli\Task
 
                                 $reminder_email_obj = $reminder_repo->getReminderEmailByPubid($pubid);
 
-                                echo "\nBACKET FOUND *$pubid*\n";
-                                
                                 //reminder found with the pubid captured on the subject line
                                 if(is_object($reminder_email_obj)
                                     && property_exists($reminder_email_obj, 'sb_reminder_email_id')
@@ -151,13 +149,13 @@ class MailerTask extends \Phalcon\Cli\Task
                                                                     'message_type' => 'email',
                                                                     'subject' => $subject,
                                                                     'message' => $html,
-                                                                    'summary' => '',
+                                                                    'summary' => null,
                                                                     'delivery_type' => 'set-date',
                                                                     'delivery_dt' => $now_utc,
-                                                                    'delivery_age' => 0,
-                                                                    'delivery_age_day_offset' => 0);
+                                                                    'delivery_age' => null,
+                                                                    'delivery_age_day_offset' => null);
                                             
-                                            $message_obj = $message_repo->createMessage($message_data, $this->config->message);
+                                            $message_obj = $message_repo->createMessage($message_data);
 
                                             if(is_object($message_obj))
                                             {
@@ -282,11 +280,15 @@ class MailerTask extends \Phalcon\Cli\Task
             {
                 foreach($reminder_emails as $key => $reminder_email)
                 {
+                    $reply_to = $this->config->reminder->email_from;
+                    $reply_to = str_replace('%pubid%', $reminder_email->pubid, $reply_to);                    
+
                     $send_params = array('fromname' => 'Soulbox Reminders',
-                                            'from' => 'reminders@sbx.email',
+                                            'from' => $this->config->reminder->email_from,
                                             'to' => $reminder_email->receiver_email, 
-                                            'subject' => $reminder_email->subject.' ('.$reminder_email->pubid.')',
-                                            'message' => $reminder_email->message);
+                                            'subject' => $reminder_email->subject,
+                                            'message' => $reminder_email->message,
+                                            'reply_to' => $reply_to);
 
                     $response = $wrapper->send($send_params);
                     $response_arr = json_decode($response, true);

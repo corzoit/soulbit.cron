@@ -29,12 +29,6 @@ class SbMessage
         $messaje_obj->loadFromArray($message_data);
         if($messaje_obj->save())
         {
-            $hashids = new Hashids($message_config->secret, 
-                                    $message_config->length, 
-                                    $message_config->alpha);
-            $messaje_obj->pubid = $hashids->encode($messaje_obj->sb_message_id);
-            $messaje_obj->save();
-                    
             $messages_created++;
         }
         else

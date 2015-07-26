@@ -22,7 +22,7 @@ class SbReminder
         $day_of_year    = date('z')+1;
 
         $time_now       = date('H:i:').'00'; //utc time
-        //$time_now       = '21:15:00'; //for testing, this has to match the record on DB for the process to go on
+        $time_now       = '21:15:00'; //for testing, this has to match the record on DB for the process to go on
 
         $conditions = "status = 1 
                         AND CHAR_LENGTH(TRIM(subject)) > 0
@@ -70,10 +70,7 @@ class SbReminder
 
             if($re_obj->save())
             {
-                $hashids = new Hashids($reminder_config->secret, 
-                                        $reminder_config->length, 
-                                        $reminder_config->alpha);
-                $re_obj->pubid = $hashids->encode($re_obj->sb_reminder_email_id);
+                $re_obj->pubid = hash_hmac($reminder_config->algo, $re_obj->sb_reminder_email_id, $reminder_config->secret);
                 $re_obj->save();
                         
                 $reminders_created++;
