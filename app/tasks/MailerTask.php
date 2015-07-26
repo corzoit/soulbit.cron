@@ -275,6 +275,9 @@ class MailerTask extends \Phalcon\Cli\Task
            
             $reminder_repo = new RepoReminder();
             $reminder_emails = $reminder_repo->getReminderEmails(1000);
+echo("<pre>reminder_emails\n\n");
+            print_r($reminder_emails);
+            echo("</pre>");
             //TODO: improvement, if using Mandrill then send chunks of 1000
             while($wrapper != null && count($reminder_emails))
             {
